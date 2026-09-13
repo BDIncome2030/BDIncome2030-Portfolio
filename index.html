@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="bn">
 <head>
@@ -70,6 +71,7 @@
       margin: auto;
       color: #6b7280;
       font-size: 17px;
+      line-height: 1.7;
     }
 
     .hero button {
@@ -113,6 +115,7 @@
 
     .card p {
       color: #6b7280;
+      line-height: 1.6;
     }
 
     .auth-box {
@@ -152,7 +155,6 @@
 
     .close-btn {
       background: #ef4444;
-      margin-top: 10px;
     }
 
     #dashboard {
@@ -214,6 +216,7 @@
 </header>
 
 <section class="hero" id="home">
+
   <h1>স্বাগতম BDIncome2030-এ</h1>
 
   <p>
@@ -222,6 +225,7 @@
   </p>
 
   <button onclick="showSignup()">শুরু করুন</button>
+
 </section>
 
 <section class="container" id="features">
@@ -323,11 +327,15 @@
   <h2>আমার Dashboard</h2>
 
   <div class="dashboard-card">
+
     <h3>👤 ব্যবহারকারী</h3>
+
     <p id="userEmail">Loading...</p>
+
   </div>
 
   <div class="dashboard-card">
+
     <h3>💰 Balance</h3>
 
     <div class="balance">
@@ -337,13 +345,23 @@
   </div>
 
   <div class="dashboard-card">
+
     <h3>📋 Tasks</h3>
-    <p>শীঘ্রই এখানে উপলব্ধ টাস্ক দেখানো হবে।</p>
+
+    <p>
+      শীঘ্রই এখানে উপলব্ধ টাস্ক দেখানো হবে।
+    </p>
+
   </div>
 
   <div class="dashboard-card">
+
     <h3>👥 Referral</h3>
-    <p id="referralCode">Referral code loading...</p>
+
+    <p id="referralCode">
+      Referral code loading...
+    </p>
+
   </div>
 
   <button class="logout-btn" onclick="logout()">
@@ -352,15 +370,20 @@
 
 </section>
 
-<!-- IMPORTANT:
-     Supabase অবশ্যই script.js-এর আগে load হবে
--->
+<!-- SUPABASE -->
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-<scri<script src="./script.js?v=999"></script>
+<!-- YOUR JAVASCRIPT -->
+
+<script src="./script.js?v=999"></script>
+
 <footer>
-  <p>© 2026 BDIncome2030. All Rights Reserved.</p>
+
+  <p>
+    © 2026 BDIncome2030. All Rights Reserved.
+  </p>
+
 </footer>
 
 </body>
