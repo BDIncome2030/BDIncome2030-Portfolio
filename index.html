@@ -1,389 +1,125 @@
-
 <!DOCTYPE html>
 <html lang="bn">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>BDIncome2030 | Online Task Platform</title>
-
+  <title>BDIncome2030</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, sans-serif;
-    }
-
-    body {
-      background: #f4f7fb;
-      color: #1f2937;
-    }
-
-    header {
-      background: #111827;
-      color: white;
-      padding: 18px 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 15px;
-    }
-
-    .logo {
-      font-size: 24px;
-      font-weight: bold;
-    }
-
-    nav button {
-      padding: 10px 16px;
-      border: none;
-      border-radius: 7px;
-      margin-left: 8px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-
-    .login-btn {
-      background: white;
-      color: #111827;
-    }
-
-    .signup-btn {
-      background: #22c55e;
-      color: white;
-    }
-
-    .hero {
-      text-align: center;
-      padding: 70px 20px;
-      background: white;
-    }
-
-    .hero h1 {
-      font-size: 38px;
-      margin-bottom: 15px;
-    }
-
-    .hero p {
-      max-width: 650px;
-      margin: auto;
-      color: #6b7280;
-      font-size: 17px;
-      line-height: 1.7;
-    }
-
-    .hero button {
-      margin-top: 25px;
-      padding: 14px 28px;
-      background: #111827;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-size: 16px;
-      cursor: pointer;
-    }
-
-    .container {
-      max-width: 1000px;
-      margin: auto;
-      padding: 50px 20px;
-    }
-
-    h2 {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
-    }
-
-    .card {
-      background: white;
-      padding: 25px;
-      border-radius: 12px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-    }
-
-    .card h3 {
-      margin-bottom: 10px;
-    }
-
-    .card p {
-      color: #6b7280;
-      line-height: 1.6;
-    }
-
-    .auth-box {
-      display: none;
-      max-width: 420px;
-      margin: 30px auto;
-      background: white;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.12);
-    }
-
-    .auth-box h2 {
-      margin-bottom: 20px;
-    }
-
-    input {
-      width: 100%;
-      padding: 13px;
-      margin: 10px 0;
-      border: 1px solid #d1d5db;
-      border-radius: 7px;
-      font-size: 16px;
-    }
-
-    .form-btn {
-      width: 100%;
-      padding: 13px;
-      border: none;
-      border-radius: 7px;
-      background: #111827;
-      color: white;
-      font-size: 16px;
-      cursor: pointer;
-      margin-top: 10px;
-    }
-
-    .close-btn {
-      background: #ef4444;
-    }
-
-    #dashboard {
-      display: none;
-    }
-
-    .dashboard-card {
-      background: white;
-      padding: 25px;
-      border-radius: 12px;
-      margin-bottom: 20px;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-    }
-
-    .balance {
-      font-size: 32px;
-      font-weight: bold;
-      margin-top: 10px;
-    }
-
-    .logout-btn {
-      background: #ef4444;
-      color: white;
-      border: none;
-      padding: 12px 20px;
-      border-radius: 7px;
-      cursor: pointer;
-    }
-
-    footer {
-      background: #111827;
-      color: #d1d5db;
-      text-align: center;
-      padding: 25px;
-      margin-top: 40px;
-    }
-
-    @media (max-width: 600px) {
-      header {
-        justify-content: center;
-      }
-
-      .hero h1 {
-        font-size: 30px;
-      }
-    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Arial,sans-serif;background:#f5f7fb;color:#222}
+    header{background:#fff;padding:15px;display:flex;justify-content:space-between;align-items:center;box-shadow:0 1px 8px rgba(0,0,0,.08)}
+    header h1{margin:0;font-size:21px}
+    .header-actions{display:flex;gap:8px}
+    button{border:0;border-radius:8px;padding:10px 15px;cursor:pointer;font-weight:600}
+    .login-btn{background:#eee}.signup-btn,.start-btn,.submit-btn{background:#1677ff;color:#fff}
+    .logout-btn{background:#e53935;color:#fff}
+    .container{max-width:900px;margin:25px auto;padding:0 15px}
+    .hero,.dashboard-card,.task-card,.modal-card{background:#fff;border-radius:14px;padding:20px;margin-bottom:16px;box-shadow:0 3px 14px rgba(0,0,0,.07)}
+    .hero{text-align:center}.hero h2{margin-top:0}
+    .balance{font-size:28px;font-weight:700}
+    .task-card{display:flex;justify-content:space-between;gap:15px;align-items:center}
+    .task-info{flex:1}.task-reward{font-weight:700}
+    .hidden{display:none!important}
+    .modal{position:fixed;inset:0;background:rgba(0,0,0,.55);display:flex;align-items:center;justify-content:center;padding:15px;z-index:100}
+    .modal-card{width:100%;max-width:430px;margin:0}
+    .modal-card h3{margin-top:0}
+    input,textarea{width:100%;padding:12px;margin:7px 0 12px;border:1px solid #ccc;border-radius:8px;font-size:15px}
+    textarea{min-height:120px;resize:vertical}
+    .form-actions{display:flex;gap:8px}.close-btn{background:#eee}
+    .message{margin:8px 0;min-height:20px}
+    footer{text-align:center;padding:25px 10px;color:#777}
+    @media(max-width:600px){.task-card{flex-direction:column;align-items:stretch}.header-actions button{padding:8px 10px}}
   </style>
 </head>
-
 <body>
 
 <header>
-  <div class="logo">BDIncome2030</div>
-
-  <nav id="navButtons">
+  <h1>BDIncome2030</h1>
+  <div class="header-actions">
     <button class="login-btn" onclick="showLogin()">Login</button>
     <button class="signup-btn" onclick="showSignup()">Sign Up</button>
-  </nav>
+  </div>
 </header>
 
-<section class="hero" id="home">
-
-  <h1>স্বাগতম BDIncome2030-এ</h1>
-
-  <p>
-    এটি একটি অনলাইন টাস্ক প্ল্যাটফর্মের প্রাথমিক সংস্করণ।
-    ব্যবহারকারীরা বৈধ কাজ, প্রজেক্ট ও ডিজিটাল সুযোগ সম্পর্কে জানতে পারবেন।
-  </p>
-
-  <button onclick="showSignup()">শুরু করুন</button>
-
-</section>
-
-<section class="container" id="features">
-
-  <h2>আমাদের ফিচার</h2>
-
-  <div class="cards">
-
-    <div class="card">
-      <h3>📋 Tasks</h3>
-      <p>উপলব্ধ কাজ ও ডিজিটাল টাস্ক দেখুন।</p>
-    </div>
-
-    <div class="card">
-      <h3>👥 Referral</h3>
-      <p>আপনার রেফারেল তথ্য ও আমন্ত্রিত ব্যবহারকারী দেখুন।</p>
-    </div>
-
-    <div class="card">
-      <h3>💰 Balance</h3>
-      <p>আপনার অ্যাকাউন্টের ব্যালেন্স নিরাপদভাবে দেখুন।</p>
-    </div>
-
-    <div class="card">
-      <h3>🔐 Secure Account</h3>
-      <p>Supabase Authentication দিয়ে নিরাপদ Login ব্যবস্থা।</p>
-    </div>
-
+<section class="container" id="home">
+  <div class="hero">
+    <h2>BDIncome2030</h2>
+    <p>কাজ সম্পন্ন করুন এবং আপনার Dashboard থেকে তথ্য দেখুন।</p>
+    <button class="start-btn" onclick="showSignup()">শুরু করুন</button>
   </div>
-
 </section>
-
-<!-- SIGNUP -->
-
-<div class="auth-box" id="signupBox">
-
-  <h2>নতুন অ্যাকাউন্ট</h2>
-
-  <input
-    type="text"
-    id="signupName"
-    placeholder="আপনার নাম"
-  >
-
-  <input
-    type="email"
-    id="signupEmail"
-    placeholder="আপনার Email"
-  >
-
-  <input
-    type="password"
-    id="signupPassword"
-    placeholder="Password (কমপক্ষে 6 অক্ষর)"
-  >
-
-  <button class="form-btn" onclick="signup()">
-    Sign Up
-  </button>
-
-  <button class="form-btn close-btn" onclick="closeAuth()">
-    বন্ধ করুন
-  </button>
-
-</div>
-
-<!-- LOGIN -->
-
-<div class="auth-box" id="loginBox">
-
-  <h2>Login করুন</h2>
-
-  <input
-    type="email"
-    id="loginEmail"
-    placeholder="আপনার Email"
-  >
-
-  <input
-    type="password"
-    id="loginPassword"
-    placeholder="আপনার Password"
-  >
-
-  <button class="form-btn" onclick="login()">
-    Login
-  </button>
-
-  <button class="form-btn close-btn" onclick="closeAuth()">
-    বন্ধ করুন
-  </button>
-
-</div>
-
-<!-- DASHBOARD -->
 
 <section class="container" id="dashboard">
-
   <h2>আমার Dashboard</h2>
 
   <div class="dashboard-card">
-
     <h3>👤 ব্যবহারকারী</h3>
-
     <p id="userEmail">Loading...</p>
-
   </div>
 
   <div class="dashboard-card">
-
     <h3>💰 Balance</h3>
-
-    <div class="balance">
-      ৳ <span id="userBalance">0.00</span>
-    </div>
-
+    <div class="balance">৳ <span id="userBalance">0.00</span></div>
   </div>
 
   <div class="dashboard-card">
-
     <h3>📋 Tasks</h3>
-
-    <p>
-      শীঘ্রই এখানে উপলব্ধ টাস্ক দেখানো হবে।
-    </p>
-
+    <div id="tasksList"><p>Tasks loading...</p></div>
   </div>
 
   <div class="dashboard-card">
-
     <h3>👥 Referral</h3>
-
-    <p id="referralCode">
-      Referral code loading...
-    </p>
-
+    <p id="referralCode">Referral code loading...</p>
   </div>
 
-  <button class="logout-btn" onclick="logout()">
-    Logout
-  </button>
-
+  <button class="logout-btn" onclick="logout()">Logout</button>
 </section>
 
-<!-- SUPABASE -->
+<div class="modal hidden" id="loginModal">
+  <div class="modal-card">
+    <h3>Login</h3>
+    <input id="loginEmail" type="email" placeholder="Email">
+    <input id="loginPassword" type="password" placeholder="Password">
+    <div id="loginMessage" class="message"></div>
+    <div class="form-actions">
+      <button class="submit-btn" onclick="login()">Login</button>
+      <button class="close-btn" onclick="closeModal('loginModal')">Close</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal hidden" id="signupModal">
+  <div class="modal-card">
+    <h3>Sign Up</h3>
+    <input id="signupEmail" type="email" placeholder="Email">
+    <input id="signupPassword" type="password" placeholder="Password">
+    <input id="signupReferral" type="text" placeholder="Referral code (optional)">
+    <div id="signupMessage" class="message"></div>
+    <div class="form-actions">
+      <button class="submit-btn" onclick="signup()">Sign Up</button>
+      <button class="close-btn" onclick="closeModal('signupModal')">Close</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal hidden" id="proofModal">
+  <div class="modal-card">
+    <h3 id="proofTitle">Task Proof</h3>
+    <p>Task সম্পন্ন করার পর নিচে আপনার Proof লিখুন।</p>
+    <textarea id="proofText" placeholder="Proof / কাজের সংক্ষিপ্ত বিবরণ"></textarea>
+    <div id="proofMessage" class="message"></div>
+    <div class="form-actions">
+      <button class="submit-btn" id="proofSubmitBtn" onclick="submitProof()">Submit Task</button>
+      <button class="close-btn" onclick="closeModal('proofModal')">Close</button>
+    </div>
+  </div>
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<!-- YOUR JAVASCRIPT -->
-
-<script src="./script.js?v=999"></script>
+<script src="./script.js?v=1000"></script>
 
 <footer>
-
-  <p>
-    © 2026 BDIncome2030. All Rights Reserved.
-  </p>
-
+  <p>© 2026 BDIncome2030. All Rights Reserved.</p>
 </footer>
 
 </body>
