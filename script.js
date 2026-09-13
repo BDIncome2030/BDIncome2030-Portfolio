@@ -390,7 +390,8 @@ async function loadTasks() {
       );
 
       container.innerHTML =
-        "<p>Task লোড করা যাচ্ছে না।</p>";
+  "<p>Task Error: " + error.message + "</p>";
+
 
       return;
     }
