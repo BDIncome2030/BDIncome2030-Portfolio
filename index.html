@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>BDIncome2030 | Portfolio</title>
+
+  <title>BDIncome2030 | Online Task Platform</title>
+
   <style>
     * {
       margin: 0;
@@ -13,84 +15,171 @@
     }
 
     body {
-      background: #f5f7fb;
-      color: #222;
-      line-height: 1.6;
+      background: #f4f7fb;
+      color: #1f2937;
     }
 
     header {
       background: #111827;
       color: white;
-      text-align: center;
-      padding: 70px 20px;
+      padding: 18px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 15px;
     }
 
-    header h1 {
-      font-size: 42px;
-      margin-bottom: 10px;
-    }
-
-    header p {
-      font-size: 18px;
-      color: #d1d5db;
-    }
-
-    .btn {
-      display: inline-block;
-      margin-top: 25px;
-      padding: 12px 24px;
-      background: white;
-      color: #111827;
-      text-decoration: none;
-      border-radius: 8px;
+    .logo {
+      font-size: 24px;
       font-weight: bold;
     }
 
-    section {
-      max-width: 900px;
+    nav button {
+      padding: 10px 16px;
+      border: none;
+      border-radius: 7px;
+      margin-left: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .login-btn {
+      background: white;
+      color: #111827;
+    }
+
+    .signup-btn {
+      background: #22c55e;
+      color: white;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 70px 20px;
+      background: white;
+    }
+
+    .hero h1 {
+      font-size: 38px;
+      margin-bottom: 15px;
+    }
+
+    .hero p {
+      max-width: 650px;
       margin: auto;
-      padding: 55px 20px;
+      color: #6b7280;
+      font-size: 17px;
+    }
+
+    .hero button {
+      margin-top: 25px;
+      padding: 14px 28px;
+      background: #111827;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 50px 20px;
     }
 
     h2 {
       text-align: center;
-      margin-bottom: 25px;
-      font-size: 30px;
+      margin-bottom: 30px;
     }
 
-    .about {
-      text-align: center;
-      font-size: 17px;
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
     }
 
-    .skills {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 12px;
-    }
-
-    .skill {
-      background: white;
-      padding: 12px 20px;
-      border-radius: 8px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-    }
-
-    .project {
+    .card {
       background: white;
       padding: 25px;
-      margin: 15px 0;
-      border-radius: 10px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
     }
 
-    .project h3 {
-      margin-bottom: 8px;
+    .card h3 {
+      margin-bottom: 10px;
     }
 
-    .contact {
-      text-align: center;
+    .card p {
+      color: #6b7280;
+    }
+
+    .auth-box {
+      display: none;
+      max-width: 420px;
+      margin: 30px auto;
+      background: white;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 5px 20px rgba(0,0,0,0.12);
+    }
+
+    .auth-box h2 {
+      margin-bottom: 20px;
+    }
+
+    input {
+      width: 100%;
+      padding: 13px;
+      margin: 10px 0;
+      border: 1px solid #d1d5db;
+      border-radius: 7px;
+      font-size: 16px;
+    }
+
+    .form-btn {
+      width: 100%;
+      padding: 13px;
+      border: none;
+      border-radius: 7px;
+      background: #111827;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .close-btn {
+      background: #ef4444;
+      margin-top: 10px;
+    }
+
+    #dashboard {
+      display: none;
+    }
+
+    .dashboard-card {
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+    }
+
+    .balance {
+      font-size: 32px;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .logout-btn {
+      background: #ef4444;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 7px;
+      cursor: pointer;
     }
 
     footer {
@@ -98,11 +187,16 @@
       color: #d1d5db;
       text-align: center;
       padding: 25px;
+      margin-top: 40px;
     }
 
     @media (max-width: 600px) {
-      header h1 {
-        font-size: 32px;
+      header {
+        justify-content: center;
+      }
+
+      .hero h1 {
+        font-size: 30px;
       }
     }
   </style>
@@ -110,63 +204,168 @@
 
 <body>
 
-  <header>
-    <h1>BDIncome2030</h1>
-    <p>Web Developer | Creator | Lifelong Learner</p>
-    <a class="btn" href="#contact">Contact Me</a>
-  </header>
+<header>
+  <div class="logo">BDIncome2030</div>
 
-  <section id="about">
-    <h2>About Me</h2>
-    <p class="about">
-      Hello! I am BDIncome2030. I am passionate about web development,
-      technology and building useful digital projects. I am continuously
-      learning and improving my skills.
-    </p>
-  </section>
+  <nav id="navButtons">
+    <button class="login-btn" onclick="showLogin()">Login</button>
+    <button class="signup-btn" onclick="showSignup()">Sign Up</button>
+  </nav>
+</header>
 
-  <section id="skills">
-    <h2>My Skills</h2>
-    <div class="skills">
-      <div class="skill">HTML</div>
-      <div class="skill">CSS</div>
-      <div class="skill">JavaScript</div>
-      <div class="skill">Git</div>
-      <div class="skill">GitHub</div>
-      <div class="skill">Web Development</div>
-    </div>
-  </section>
 
-  <section id="projects">
-    <h2>My Projects</h2>
+<section class="hero" id="home">
+  <h1>স্বাগতম BDIncome2030-এ</h1>
 
-    <div class="project">
-      <h3>Personal Portfolio</h3>
-      <p>
-        A responsive personal portfolio website created with HTML and CSS.
-      </p>
+  <p>
+    এটি একটি অনলাইন টাস্ক প্ল্যাটফর্মের প্রাথমিক সংস্করণ।
+    ব্যবহারকারীরা বৈধ কাজ, প্রজেক্ট ও ডিজিটাল সুযোগ সম্পর্কে জানতে পারবেন।
+  </p>
+
+  <button onclick="showSignup()">শুরু করুন</button>
+</section>
+
+
+<section class="container" id="features">
+
+  <h2>আমাদের ফিচার</h2>
+
+  <div class="cards">
+
+    <div class="card">
+      <h3>📋 Tasks</h3>
+      <p>উপলব্ধ কাজ ও ডিজিটাল টাস্ক দেখুন।</p>
     </div>
 
-    <div class="project">
-      <h3>Web Development Project</h3>
-      <p>
-        My upcoming web development project will be added here.
-      </p>
+    <div class="card">
+      <h3>👥 Referral</h3>
+      <p>আপনার রেফারেল তথ্য ও আমন্ত্রিত ব্যবহারকারী দেখুন।</p>
     </div>
 
-  </section>
-
-  <section id="contact">
-    <h2>Contact Me</h2>
-    <div class="contact">
-      <p>GitHub: @BDIncome2030</p>
-      <p>Thank you for visiting my portfolio!</p>
+    <div class="card">
+      <h3>💰 Balance</h3>
+      <p>আপনার অ্যাকাউন্টের ব্যালেন্স নিরাপদভাবে দেখুন।</p>
     </div>
-  </section>
 
-  <footer>
-    <p>© 2026 BDIncome2030. All Rights Reserved.</p>
-  </footer>
+    <div class="card">
+      <h3>🔐 Secure Account</h3>
+      <p>Supabase Authentication দিয়ে নিরাপদ Login ব্যবস্থা।</p>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- SIGNUP -->
+
+<div class="auth-box" id="signupBox">
+
+  <h2>নতুন অ্যাকাউন্ট</h2>
+
+  <input
+    type="text"
+    id="signupName"
+    placeholder="আপনার নাম"
+  >
+
+  <input
+    type="email"
+    id="signupEmail"
+    placeholder="আপনার Email"
+  >
+
+  <input
+    type="password"
+    id="signupPassword"
+    placeholder="Password (কমপক্ষে 6 অক্ষর)"
+  >
+
+  <button class="form-btn" onclick="signup()">
+    Sign Up
+  </button>
+
+  <button class="form-btn close-btn" onclick="closeAuth()">
+    বন্ধ করুন
+  </button>
+
+</div>
+
+
+<!-- LOGIN -->
+
+<div class="auth-box" id="loginBox">
+
+  <h2>Login করুন</h2>
+
+  <input
+    type="email"
+    id="loginEmail"
+    placeholder="আপনার Email"
+  >
+
+  <input
+    type="password"
+    id="loginPassword"
+    placeholder="আপনার Password"
+  >
+
+  <button class="form-btn" onclick="login()">
+    Login
+  </button>
+
+  <button class="form-btn close-btn" onclick="closeAuth()">
+    বন্ধ করুন
+  </button>
+
+</div>
+
+
+<!-- DASHBOARD -->
+
+<section class="container" id="dashboard">
+
+  <h2>আমার Dashboard</h2>
+
+  <div class="dashboard-card">
+    <h3>👤 ব্যবহারকারী</h3>
+    <p id="userEmail">Loading...</p>
+  </div>
+
+  <div class="dashboard-card">
+    <h3>💰 Balance</h3>
+    <div class="balance">
+      ৳ <span id="userBalance">0.00</span>
+    </div>
+  </div>
+
+  <div class="dashboard-card">
+    <h3>📋 Tasks</h3>
+    <p>শীঘ্রই এখানে উপলব্ধ টাস্ক দেখানো হবে।</p>
+  </div>
+
+  <div class="dashboard-card">
+    <h3>👥 Referral</h3>
+    <p id="referralCode">Referral code loading...</p>
+  </div>
+
+  <button class="logout-btn" onclick="logout()">
+    Logout
+  </button>
+
+</section>
+
+
+<footer>
+  <p>© 2026 BDIncome2030. All Rights Reserved.</p>
+</footer>
+
+
+<!-- Supabase -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<!-- Your JavaScript -->
+<script src="script.js"></script>
 
 </body>
 </html>
