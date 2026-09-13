@@ -1,4 +1,3 @@
-alert("JavaScript কাজ করছে");
 <!DOCTYPE html>
 <html lang="bn">
 <head>
@@ -214,7 +213,6 @@ alert("JavaScript কাজ করছে");
   </nav>
 </header>
 
-
 <section class="hero" id="home">
   <h1>স্বাগতম BDIncome2030-এ</h1>
 
@@ -225,7 +223,6 @@ alert("JavaScript কাজ করছে");
 
   <button onclick="showSignup()">শুরু করুন</button>
 </section>
-
 
 <section class="container" id="features">
 
@@ -256,7 +253,6 @@ alert("JavaScript কাজ করছে");
   </div>
 
 </section>
-
 
 <!-- SIGNUP -->
 
@@ -292,7 +288,6 @@ alert("JavaScript কাজ করছে");
 
 </div>
 
-
 <!-- LOGIN -->
 
 <div class="auth-box" id="loginBox">
@@ -321,7 +316,6 @@ alert("JavaScript কাজ করছে");
 
 </div>
 
-
 <!-- DASHBOARD -->
 
 <section class="container" id="dashboard">
@@ -335,9 +329,11 @@ alert("JavaScript কাজ করছে");
 
   <div class="dashboard-card">
     <h3>💰 Balance</h3>
+
     <div class="balance">
       ৳ <span id="userBalance">0.00</span>
     </div>
+
   </div>
 
   <div class="dashboard-card">
@@ -356,18 +352,17 @@ alert("JavaScript কাজ করছে");
 
 </section>
 
-<script src="./script.js?v=2"></script>
+<!-- IMPORTANT:
+     Supabase অবশ্যই script.js-এর আগে load হবে
+-->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="./script.js?v=3"></script>
 
 <footer>
   <p>© 2026 BDIncome2030. All Rights Reserved.</p>
 </footer>
-
-
-<!-- Supabase -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<!-- Your JavaScript -->
-
 
 </body>
 </html>
