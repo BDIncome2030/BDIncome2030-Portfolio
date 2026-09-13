@@ -1,3 +1,4 @@
+alert("SCRIPT JS LOADED");
 alert("JavaScript কাজ করছে");
 
 // =========================
