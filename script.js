@@ -1,3 +1,3 @@
-const SUPABASE_URL = "এখানে আপনার Project URL বসাবেন";
+const SUPABASE_URL = https://jqpxkqitklzxhzcobisv.supabase.co/rest/v1/
 
 const SUPABASE_KEY = "এখানে আপনার Publishable Key বসাবেন";
