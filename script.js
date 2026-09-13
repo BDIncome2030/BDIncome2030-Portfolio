@@ -564,8 +564,9 @@ function createTaskArea() {
 // START TASK
 // ==========================================
 
-async async function startTask(task) {
-  if (!task) {
+async function startTask(task) {
+
+  async function startTask(task) { (!task) {
     return;
   }
 
