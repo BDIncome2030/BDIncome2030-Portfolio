@@ -61,7 +61,34 @@
     <h3>💰 Balance</h3>
     <div class="balance">৳ <span id="userBalance">0.00</span></div>
   </div>
+<div class="dashboard-card">
+  <h3>💸 Withdraw</h3>
 
+  <input
+    type="number"
+    id="withdrawAmount"
+    placeholder="টাকার পরিমাণ"
+    min="1"
+  >
+
+  <select id="withdrawMethod">
+    <option value="">Withdraw Method নির্বাচন করুন</option>
+    <option value="bkash">bKash</option>
+    <option value="nagad">Nagad</option>
+  </select>
+
+  <input
+    type="text"
+    id="withdrawNumber"
+    placeholder="bKash/Nagad নম্বর"
+  >
+
+  <button class="start-btn" onclick="submitWithdraw()">
+    Withdraw Request
+  </button>
+
+  <p id="withdrawMessage"></p>
+</div>
   <div class="dashboard-card">
     <h3>📋 Tasks</h3>
     <div id="tasksList"><p>Tasks loading...</p></div>
