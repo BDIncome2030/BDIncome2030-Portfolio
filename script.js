@@ -708,7 +708,32 @@ async function submitProof() {
 
       return;
     }
+// Reward balance এ যোগ করুন
+const rewardAmount = Number(selectedTask.reward || 0);
 
+const { data: profile, error: profileError } =
+  await supabaseClient
+    .from("profiles")
+    .select("balance")
+    .eq("id", currentUser.id)
+    .single();
+
+if (profileError) {
+  throw profileError;
+}
+
+const newBalance =
+  Number(profile?.balance || 0) + rewardAmount;
+
+const { error: balanceError } =
+  await supabaseClient
+    .from("profiles")
+    .update({ balance: newBalance })
+    .eq("id", currentUser.id);
+
+if (balanceError) {
+  throw balanceError;
+}
     message.textContent =
       "Task সফলভাবে জমা হয়েছে।";
 
