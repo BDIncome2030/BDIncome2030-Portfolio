@@ -355,7 +355,10 @@ async function loadProfile(userId) {
         "userBalance",
         "0.00"
       );
-
+setText(
+  "referralCode",
+  "Referral code পাওয়া যায়নি"
+);
       return;
     }
 
