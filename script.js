@@ -832,3 +832,87 @@ function setHTML(id, value) {
       value;
   }
 }
+// ==========================================
+// WITHDRAW REQUEST
+// ==========================================
+
+async function submitWithdraw() {
+  const amount = Number(
+    document.getElementById("withdrawAmount").value
+  );
+
+  const method =
+    document.getElementById("withdrawMethod").value;
+
+  const number =
+    document.getElementById("withdrawNumber").value.trim();
+
+  const message =
+    document.getElementById("withdrawMessage");
+
+  if (!currentUser) {
+    message.textContent = "আগে Login করুন।";
+    return;
+  }
+
+  if (!amount || amount <= 0) {
+    message.textContent = "সঠিক টাকার পরিমাণ দিন।";
+    return;
+  }
+
+  if (!method) {
+    message.textContent = "Withdraw Method নির্বাচন করুন।";
+    return;
+  }
+
+  if (!number) {
+    message.textContent = "bKash/Nagad নম্বর দিন।";
+    return;
+  }
+
+  if (amount > 5) {
+    message.textContent = "আপনার বর্তমান Balance-এর চেয়ে বেশি টাকা চাওয়া যাবে না।";
+    return;
+  }
+
+  const button =
+    document.querySelector(
+      'button[onclick="submitWithdraw()"]'
+    );
+
+  button.disabled = true;
+  message.textContent = "Request জমা হচ্ছে...";
+
+  try {
+    const { error } = await supabaseClient
+      .from("withdrawal_requests")
+      .insert({
+        user_id: currentUser.id,
+        amount: amount,
+        payment_method: method,
+        payment_number: number,
+        status: "pending"
+      });
+
+    if (error) {
+      console.error("Withdraw error:", error);
+      message.textContent =
+        "Withdraw Request জমা হয়নি: " + error.message;
+      return;
+    }
+
+    message.textContent =
+      "Withdraw Request সফলভাবে জমা হয়েছে।";
+
+    document.getElementById("withdrawAmount").value = "";
+    document.getElementById("withdrawMethod").value = "";
+    document.getElementById("withdrawNumber").value = "";
+
+  } catch (error) {
+    console.error(error);
+    message.textContent =
+      "Request জমা দিতে সমস্যা হয়েছে।";
+  } finally {
+    button.disabled = false;
+  }
+}
