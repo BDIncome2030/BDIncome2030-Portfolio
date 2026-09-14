@@ -325,60 +325,71 @@ function showLoggedOut() {
 // LOAD PROFILE
 // ==========================================
 
+// ==========================================
+// LOAD PROFILE
+// ==========================================
+
 async function loadProfile(userId) {
-
   try {
-
-    const {
-      data,
-      error
-    } = await supabaseClient
+    const { data, error } = await supabaseClient
       .from("profiles")
       .select("*")
       .eq("id", userId)
-      .single();
+      .maybeSingle();
 
     if (error) {
-
-      console.error(
-        "Profile error:",
-        error
-      );
+      console.error("Profile error:", error);
 
       setText(
         "userEmail",
-        currentUser?.email ||
-        "Email not available"
+        currentUser?.email || "Email not available"
       );
 
+      setText("userBalance", "0.00");
+
       setText(
-        "userBalance",
-        "0.00"
+        "referralCode",
+        "Referral code পাওয়া যায়নি"
       );
-setText(
-  "referralCode",
-  "Referral code পাওয়া যায়নি"
-);
+
       return;
     }
 
+    // Profile না থাকলে
+    if (!data) {
+      console.error("Profile not found for user:", userId);
+
+      setText(
+        "userEmail",
+        currentUser?.email || "Email not available"
+      );
+
+      setText("userBalance", "0.00");
+
+      setText(
+        "referralCode",
+        "Referral code পাওয়া যায়নি"
+      );
+
+      return;
+    }
+
+    // Email
     setText(
       "userEmail",
-      currentUser?.email ||
-      "Email not available"
+      currentUser?.email || "Email not available"
     );
 
+    // Balance
     const balance =
       data.balance !== null &&
       data.balance !== undefined
         ? Number(data.balance).toFixed(2)
         : "0.00";
 
-    setText(
-      "userBalance",
-      balance
-    );
+    setText("userBalance", balance);
 
+    // Referral
     const referral =
       data.referral_code ||
       data.referralCode ||
@@ -386,15 +397,22 @@ setText(
 
     setText(
       "referralCode",
-      "Referral Code: " +
-      referral
+      "Referral Code: " + referral
     );
 
   } catch (error) {
+    console.error("loadProfile:", error);
 
-    console.error(
-      "loadProfile:",
-      error
+    setText(
+      "userEmail",
+      currentUser?.email || "Email not available"
+    );
+
+    setText("userBalance", "0.00");
+
+    setText(
+      "referralCode",
+      "Referral code পাওয়া যায়নি"
     );
   }
 }
