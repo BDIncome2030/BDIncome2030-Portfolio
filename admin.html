@@ -249,10 +249,9 @@
 
       document.getElementById("adminPanel")
         .style.display = "block";
-
-      await loadWithdrawals();
-
-    } catch (error) {
+await loadWithdrawals();
+await loadTaskSubmissions();
+} catch (error) {
 
       console.error(error);
 
@@ -496,7 +495,124 @@
 
     }
   }
+  // ==========================================
+  // LOAD TASK SUBMISSIONS
+  // ==========================================
 
+  async function loadTaskSubmissions() {
+
+    const list =
+      document.getElementById("taskSubmissionList");
+
+    list.innerHTML =
+      '<div class="loading">Loading task submissions...</div>';
+
+    try {
+
+      const {
+        data,
+        error
+      } = await supabaseClient
+        .from("task_submissions")
+        .select("*")
+        .order("created_at", {
+          ascending: false
+        });
+
+      if (error) {
+
+        console.error(error);
+
+        list.innerHTML =
+          '<div class="card empty">' +
+          'Task submissions load করা যায়নি।<br><br>' +
+          error.message +
+          '</div>';
+
+        return;
+      }
+
+      if (!data || data.length === 0) {
+
+        list.innerHTML =
+          '<div class="card empty">' +
+          'কোনো Task Submission নেই।' +
+          '</div>';
+
+        return;
+      }
+
+      list.innerHTML = "";
+
+      data.forEach(submission => {
+
+        const div =
+          document.createElement("div");
+
+        div.className = "card withdrawal";
+
+        const date =
+          submission.created_at
+            ? new Date(submission.created_at)
+                .toLocaleString("bn-BD")
+            : "N/A";
+
+        div.innerHTML = `
+
+          <div class="row">
+            <span class="label">Submission ID:</span>
+            ${submission.id ?? "N/A"}
+          </div>
+
+          <div class="row">
+            <span class="label">User ID:</span>
+            ${submission.user_id ?? "N/A"}
+          </div>
+
+          <div class="row">
+            <span class="label">Task ID:</span>
+            ${submission.task_id ?? "N/A"}
+          </div>
+
+          <div class="row">
+            <span class="label">Status:</span>
+            ${submission.status ?? "N/A"}
+          </div>
+
+          <div class="row">
+            <span class="label">Proof:</span>
+            ${submission.proof ?? "N/A"}
+          </div>
+
+          <div class="row">
+            <span class="label">Submitted:</span>
+            ${date}
+          </div>
+
+        `;
+
+        list.appendChild(div);
+
+      });
+
+    } catch (error) {
+
+      console.error(error);
+
+      list.innerHTML =
+        '<div class="card empty">' +
+        'একটি সমস্যা হয়েছে।<br><br>' +
+        error.message +
+        '</div>';
+    }
+  }
+
+
+  // ==========================================
+  // LOGOUT
+  // ==========================================
+
+  async function logout() {
 
   // ==========================================
   // LOGOUT
