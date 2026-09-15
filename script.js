@@ -916,3 +916,88 @@ async function submitWithdraw() {
     button.disabled = false;
   }
 }
+// ==========================================
+// TASK SUBMISSION APPROVE / REJECT
+// ==========================================
+
+async function processTaskSubmission(submissionId, action, button) {
+
+  const confirmText =
+    action === "approve"
+      ? "এই Task Submission Approve করবেন?"
+      : "এই Task Submission Reject করবেন?";
+
+  if (!confirm(confirmText)) {
+    return;
+  }
+
+  const buttons =
+    button.parentElement.querySelectorAll("button");
+
+  buttons.forEach(btn => {
+    btn.disabled = true;
+  });
+
+  button.textContent = "Processing...";
+
+  try {
+
+    const { data, error } =
+      await supabaseClient.rpc(
+        "admin_process_task_submission",
+        {
+          p_submission_id: submissionId,
+          p_action: action
+        }
+      );
+
+    if (error) {
+      console.error(error);
+
+      alert("সমস্যা হয়েছে:\n" + error.message);
+
+      buttons.forEach(btn => {
+        btn.disabled = false;
+      });
+
+      return;
+    }
+
+    if (data === "approved") {
+
+      alert(
+        "✅ Task সফলভাবে Approve হয়েছে।\n\n" +
+        "User-এর Balance-এ Reward যোগ হয়েছে।"
+      );
+
+    } else if (data === "rejected") {
+
+      alert("❌ Task Reject হয়েছে।");
+
+    } else if (data === "already_approved") {
+
+      alert("এই Task আগেই Approve করা হয়েছে।");
+
+    } else {
+
+      alert("Result: " + data);
+    }
+
+    if (typeof loadTaskSubmissions === "function") {
+      await loadTaskSubmissions();
+    }
+
+  } catch (error) {
+
+    console.error(error);
+
+    alert(
+      "একটি সমস্যা হয়েছে:\n" +
+      error.message
+    );
+
+    buttons.forEach(btn => {
+      btn.disabled = false;
+    });
+  }
+}
