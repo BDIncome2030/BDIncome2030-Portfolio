@@ -557,7 +557,7 @@ await loadTaskSubmissions();
                 .toLocaleString("bn-BD")
             : "N/A";
 
-        div.innerHTML = `
+                div.innerHTML = `
 
           <div class="row">
             <span class="label">Submission ID:</span>
@@ -576,7 +576,9 @@ await loadTaskSubmissions();
 
           <div class="row">
             <span class="label">Status:</span>
-            ${submission.status ?? "N/A"}
+            <span class="status">
+              ${submission.status ?? "N/A"}
+            </span>
           </div>
 
           <div class="row">
@@ -589,8 +591,23 @@ await loadTaskSubmissions();
             ${date}
           </div>
 
-        `;
+          <div class="buttons">
 
+            <button
+              class="approve"
+              onclick="processTaskSubmission(${submission.id}, 'approved', this)">
+              ✅ Approve
+            </button>
+
+            <button
+              class="reject"
+              onclick="processTaskSubmission(${submission.id}, 'rejected', this)">
+              ❌ Reject
+            </button>
+
+          </div>
+
+        `;
         list.appendChild(div);
 
       });
